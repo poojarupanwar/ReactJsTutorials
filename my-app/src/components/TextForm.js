@@ -16,13 +16,24 @@ export default function TextForm(props) {
         setText(newText)
     }
     const handleSentenceClick=()=>{
-      let textArr= text.toString.split("");
-        setText(textArr)
+      let newText= text.split(" ");
+      let len=newText.length;
+     for(let i=0;i<len;i++){
+       console.log(newText[i][0].toUpperCase());
+     }
+    }
+    const handleCopyText=()=>{
+        let text=document.getElementById("myBox");
+        text.select();
+        text.setSelectionRange(0,9999);
+        navigator.clipboard.writeText(text.value);
     }
 
     const handleOnChange=(event)=>{
          setText(event.target.value);
     }
+
+
     const [text, setText] = useState('Enter text here');
      //   setText("new text");
   return (
@@ -38,6 +49,7 @@ export default function TextForm(props) {
     <button className='btn btn-primary mx-1' onClick={handleLowClick}> Lowercase</button>
     <button className='btn btn-primary mx-1' onClick={handleSentenceClick}> Sentence Case</button>   
     <button className='btn btn-primary mx-1' onClick={handleClearClick}>Clear Text</button>
+    <button className='btn btn-primary mx-1' onClick={handleCopyText}>Copy Text</button>
     </div>
     <div  className='container my-3'>
         <h1>Your Text Summary</h1>
